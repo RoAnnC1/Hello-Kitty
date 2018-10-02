@@ -1,1 +1,108 @@
+---
+title: Realtime Ingest Location
+---
+
+Realtime Ingest Location
+========================
+
+-   [Overview](#overview)
+
+-   [Regional Availability](#regional-availability)
+
+-   [Request Headers](#request-headers)
+
+-   [Response Headers](#response-headers)
+
+-   [Status Codes](#status-codes)
+
+-   [Example](#example)
+
+-   [Schema](#schema)
+
+-   [dropOffLocation](#schema-dropOffLocation)
+
+-   [address](#schema-address)
+
+-   [errorDescription](#schema-errorDescription)
+
+Overview
+--------
+
+This API provides an endpoint to ingest real time user location information from
+Rideshare Services.
+
+Regional Availability
+---------------------
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+https://us.api.concursolutions.com/realtimeingest
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Request Headers
+---------------
+
+-   [RFC 7235 Authorization](https://tools.ietf.org/html/rfc7235#section-4.2)
+
+### Request Payload
+
+Please refer the [Schema](#schema) section for more information regarding each
+field in the payload.
+
+Response Headers
+----------------
+
+-   [concur-correlationid] Concur specific custom header
+
+-   [RFC 7231 Content-Type](https://tools.ietf.org/html/rfc7231#section-3.1.1.5)
+
+-   [RFC 7230 Content-Length](https://tools.ietf.org/html/rfc7230#section-3.3.2)
+
+-   [RFC 7231 Date](https://tools.ietf.org/html/rfc7231#section-7.1.1.2)
+
+-   [RFC 7231 Server](https://tools.ietf.org/html/rfc7231#section-7.4.2)
+
+### Response Payload
+
+| Name                 | Type   | Format | Description                         |
+|----------------------|--------|--------|-------------------------------------|
+| concur-correlationId | String | \-     | Concur specific custom field        |
+| requestId            | String | \-     | Unique ID for the request           |
+| appVersion           | String | \-     | Application version number          |
+| message              | String | \-     | Success / Error message             |
+| errorDescription     | Object | JSON   | Description of error, if applicable |
+
+Status Codes
+------------
+
+-   [200 OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)
+
+-   [400 Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)
+
+-   [401 Unauthorised](https://tools.ietf.org/html/rfc7235#section-3.1)
+
+-   [406 Not Acceptable](https://tools.ietf.org/html/rfc7231#section-6.5.6)
+
+Example
+-------
+
+### Request URL
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+https://{baseURI}/location/{uuid}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### Request
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+POST https://{baseURI}/location/{uuid}
+Content-Type: application/json
+Authorization: Bearer {access-token}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`{`  
+`  "uuid": "uuid",`  
+`  "dropOffDateTime": "2018-06-08T09:00:45-0600",`  
+`  "dropOffLocation": {`  
+`    "latitude": 47.610378,`  
+`    "longitude": -122.200676,`
 
